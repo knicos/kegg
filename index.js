@@ -17,11 +17,9 @@ function ajax(options) {
 		});
 	} else {
 		var xhr = new XMLHttpRequest();
-		//xhr.withCredentials = true;
 		xhr.open(options.type.toUpperCase(), options.url);
 		xhr.setRequestHeader('Content-Type', 'text/plain');
 		xhr.onreadystatechange = function() {
-			//console.log("RESPONSE",xhr,xhr.status, xhr.responseText);
 			if (xhr.readyState === XMLHttpRequest.DONE) {
 				if (xhr.status === 200) {
 					options.success(xhr.responseText);
@@ -42,6 +40,10 @@ function ajax(options) {
 		}
 	}
 }
+
+//-----------------------------------------------------------------------------
+//    FIND
+//-----------------------------------------------------------------------------
 
 function KEGGfind(database, q, opt, cb) {
 	ajax({
@@ -83,10 +85,25 @@ function KEGGfindCompound(q, cb) {
 	KEGGfind("compound", q, undefined, cb);
 }
 
-//-------------------------------------------------------
+function KEGGfindReaction(q, cb) {
+	KEGGfind("reaction", q, undefined, cb);
+}
 
+function KEGGfindGene(q, cb) {
+	KEGGfind("genes", q, undefined, cb);
+}
 
-//-------------------------------------------------------
+function KEGGfindEnzyme(q, cb) {
+	KEGGfind("enzyme", q, undefined, cb);
+}
+
+function KEGGfindGene(q, cb) {
+	KEGGfind("pathway", q, undefined, cb);
+}
+
+//-----------------------------------------------------------------------------
+//    GET
+//-----------------------------------------------------------------------------
 
 function KEGGget(id, kind, cb) {
 	ajax({
@@ -101,6 +118,10 @@ function KEGGget(id, kind, cb) {
 		}
 	});
 }
+
+//-----------------------------------------------------------------------------
+//    GET Compounds
+//-----------------------------------------------------------------------------
 
 let kegg_cache = {};
 function KEGGgetCompoundById(id, cb) {
@@ -156,13 +177,17 @@ function KEGGgetCompoundById(id, cb) {
 	}
 }
 
-//--------------------------------------------
+//-----------------------------------------------------------------------------
+//    GET Gene
+//-----------------------------------------------------------------------------
 
 function KEGGgetGeneById(id, cb) {
 	
 }
 
-//----------------------------------------------
+//-----------------------------------------------------------------------------
+//    GET Enzyme
+//-----------------------------------------------------------------------------
 
 function extractCPD(s) {
 	let start = s.indexOf("[CPD:");
@@ -224,7 +249,9 @@ function KEGGgetEnzymeById(ec, cb, opt) {
 	}
 }
 
-//-------------------------------------------
+//-----------------------------------------------------------------------------
+//    GET Reaction
+//-----------------------------------------------------------------------------
 
 function KEGGgetReactionById(id, cb, opt) {
 	if (kegg_cache.hasOwnProperty(id)) {
@@ -270,16 +297,20 @@ function KEGGgetReactionById(id, cb, opt) {
 }
 
 
-//-------------------------------------------
+//-----------------------------------------------------------------------------
 
 exports.find = KEGGfind;
 
-exports.findCompoundByName = KEGGfindCompound;
+exports.findCompound = KEGGfindCompound;
 exports.findCompoundByFormula = KEGGfindCompoundByFormula;
 exports.findCompoundByWeight = KEGGfindCompoundByWeight;
 exports.findCompoundByMass = KEGGfindCompoundByMass;
+exports.findReaction = KEGGfindReaction;
+exports.findGene = KEGGfindGene;
+exports.findEnzyme = KEGGfindEnzyme;
 
-//exports.findReactionByName = KEGGfindReaction;
+exports.get = KEGGget;
+
 exports.getCompoundById = KEGGgetCompoundById;
 exports.getReactionById = KEGGgetReactionById;
 exports.getEnzymeById = KEGGgetEnzymeById;
