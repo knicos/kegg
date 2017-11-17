@@ -224,6 +224,51 @@ function KEGGgetEnzymeById(ec, cb, opt) {
 	}
 }
 
+//-------------------------------------------
+
+function KEGGgetReactionById(id, cb, opt) {
+	if (kegg_cache.hasOwnProperty(id)) {
+		cb(kegg_cache[id]);
+	} else {
+		KEGGget(id, undefined, function(d) {
+			let c = {
+				id: id,
+				names: [],
+				definition: null,
+				equation: null,
+				enzyme: null,
+				pathways: [],
+				rclasses: {}
+			};
+
+			let prevprop = "";
+			let lines = d.split("\n");
+			let t;
+			for (var i=0; i<lines.length; i++) {
+				let prop = lines[i].substring(0,12).trim();
+				let val = lines[i].substring(12).trim();
+
+				if (prop == "") prop = prevprop;
+				prevprop = prop;
+
+				switch (prop) {
+				case "ENTRY"		:	break;
+				case "NAME"			:	c.names.push(val.replace(";","")); break;
+				case "RCLASS"		:	t = val.split(" "); c.rclasses[t[0]] = t[2]; break;
+				case "DEFINITION"	:	c.definition = val; break;
+				case "EQUATION"		:	c.equation = val; break;
+				case "ENZYME"		:	c.enzyme = val; break;
+				case "PATHWAY"		:	break;
+				default				:	break;
+				}
+			}
+
+			kegg_cache[id] = c;
+			cb(c);
+		});
+	}
+}
+
 
 //-------------------------------------------
 
@@ -236,6 +281,6 @@ exports.findCompoundByMass = KEGGfindCompoundByMass;
 
 //exports.findReactionByName = KEGGfindReaction;
 exports.getCompoundById = KEGGgetCompoundById;
-//exports.getReactionById = KEGGgetReaction;
+exports.getReactionById = KEGGgetReactionById;
 exports.getEnzymeById = KEGGgetEnzymeById;
 
