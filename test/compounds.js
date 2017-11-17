@@ -16,5 +16,13 @@ describe("KEGG Compounds", function() {
 			done();
 		});
 	});
+
+	it("get reactions for compound", function(done) {
+		this.timeout(5000);
+		KEGG.getReactionsForCompound("C00198", function(data) {
+			console.log(data);
+			done();
+		});
+	});
 });
 

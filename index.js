@@ -299,6 +299,42 @@ function KEGGgetReactionById(id, cb, opt) {
 
 //-----------------------------------------------------------------------------
 
+function KEGGlink(target, source, cb) {
+	ajax({
+		url: base+"/link/"+target+"/"+source,
+		type: "get",
+		dataType: "text/plain",
+		success: function(data) {
+			let res = [];
+			let lines = data.split("\n");
+			for (var i=0; i<lines.length; i++) {
+				let line = lines[i].split("	");
+				if (line.length < 2) continue;
+				res.push({source: line[0], target: line[1]});
+			}
+			cb(res);
+		},
+		error: function() {
+			cb(null);
+		}
+	});
+}
+
+//-----------------------------------------------------------------------------
+
+function KEGGgetReactionsForCompound(id, cb) {
+	KEGGlink("reaction", id, function(data) {
+		if (!data) cb(data);
+		var rs = [];
+		for (var i=0; i<data.length; i++) {
+			rs.push(data[i].target.split(":")[1]);
+		}
+		cb(rs);
+	});
+}
+
+//-----------------------------------------------------------------------------
+
 exports.find = KEGGfind;
 
 exports.findCompound = KEGGfindCompound;
@@ -314,4 +350,6 @@ exports.get = KEGGget;
 exports.getCompoundById = KEGGgetCompoundById;
 exports.getReactionById = KEGGgetReactionById;
 exports.getEnzymeById = KEGGgetEnzymeById;
+
+exports.getReactionsForCompound = KEGGgetReactionsForCompound;
 
