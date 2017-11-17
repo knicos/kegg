@@ -1,0 +1,24 @@
+{
+  "name": "kegg-db",
+  "version": "0.0.1",
+  "description": "Web API to access the KEGG Database",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "kegg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/knicos/kegg.git"
+  },
+  "author": "Nicolas Pope",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  },
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}
