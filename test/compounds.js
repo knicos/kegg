@@ -3,8 +3,7 @@ const KEGG = require('../');
 
 describe("KEGG Compounds", function() {
 	it("finds compounds by name", function(done) {
-		KEGG.findCompoundByName("D-Glucono-1,5-lactone", function(c) {
-			console.log(c);
+		KEGG.findCompound("D-Glucono-1,5-lactone", function(c) {
 			assert.ok(c.length > 0);
 			done();
 		});
@@ -12,7 +11,7 @@ describe("KEGG Compounds", function() {
 
 	it("gets compound by id", function(done) {
 		KEGG.getCompoundById("C00198", function(c) {
-			console.log(c);
+			assert.equal('D-Glucono-1,5-lactone', c.names[0]);
 			done();
 		});
 	});
@@ -20,7 +19,7 @@ describe("KEGG Compounds", function() {
 	it("get reactions for compound", function(done) {
 		this.timeout(5000);
 		KEGG.getReactionsForCompound("C00198", function(data) {
-			console.log(data);
+			assert.ok(data.length > 0);
 			done();
 		});
 	});

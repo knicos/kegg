@@ -17,7 +17,7 @@ function ajax(options) {
 		});
 	} else {
 		var xhr = new XMLHttpRequest();
-		xhr.open(options.type.toUpperCase(), options.url);
+		xhr.open(options.type.toUpperCase(), encodeURI(options.url));
 		xhr.setRequestHeader('Content-Type', 'text/plain');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -46,6 +46,12 @@ function ajax(options) {
 //-----------------------------------------------------------------------------
 
 function KEGGfind(database, q, opt, cb) {
+	if (!cb) return;
+	if (!database || !q) {
+		cb(null, "Missing database or query");
+		return;
+	}
+
 	ajax({
 		url: base+"/find/"+database+"/"+q+((opt) ? "/"+opt : ""),
 		type: "get",
@@ -63,8 +69,8 @@ function KEGGfind(database, q, opt, cb) {
 
 			cb(res);
 		},
-		error: function() {
-			cb(null);
+		error: function(a,b,c) {
+			cb(null, c);
 		}
 	});
 }
@@ -124,11 +130,24 @@ function KEGGget(id, kind, cb) {
 //-----------------------------------------------------------------------------
 
 let kegg_cache = {};
+
+/**
+ * Get compound by KEGG identifier. The identifier should start with a "C".
+ * The callback function is called with a single parameter which is the JSON
+ * data object for the compound or null if there was an error.
+ *
+ * @param id {string} KEGG Identifier
+ * @param cb {Function} Callback
+ */
 function KEGGgetCompoundById(id, cb) {
 	if (kegg_cache.hasOwnProperty(id)) {
 		cb(kegg_cache[id]);
 	} else {
 		KEGGget(id, undefined, function(d) {
+			if (!d || d == "") {
+				cb(null);
+				return;
+			}
 			let c = {
 				id: id,
 				names: [],
