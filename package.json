@@ -1,6 +1,6 @@
 {
   "name": "kegg-db",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "JavaScript wrapper to the KEGG Database API",
   "main": "index.js",
   "scripts": {

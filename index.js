@@ -17,8 +17,9 @@ function ajax(options) {
 		});
 	} else {
 		var xhr = new XMLHttpRequest();
-		xhr.open(options.type.toUpperCase(), encodeURI(options.url));
+		xhr.open(options.type.toUpperCase(), encodeURI(options.url), true);
 		xhr.setRequestHeader('Content-Type', 'text/plain');
+		xhr.withCredentials = true;
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === XMLHttpRequest.DONE) {
 				if (xhr.status === 200) {
