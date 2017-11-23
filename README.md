@@ -27,17 +27,17 @@ KEGG.options({url: "http://..."});
 ## Documentation
 
 * KEGG
-** [.findReaction](#findreaction)
-** [.findCompound](#findcompound)
-** [.findCompoundByFormula](#findcompoundbyformula)
-** [.findCompoundByWeight](#findcompoundbyweight)
-** [.findCompooundByMass](#findcompoundbymass)
-** [.findGene](#findgene)
-** [.findEnzyme](#findenzyme)
-** [.getReactionById](#getreactionbyid)
-** [.getCompoundById](#getcompoundbyid)
-** [.getGeneById](#getgenebyid)
-** [.getEnzymeById](#getenzymebyid)
+    * [.findReaction](#findreaction)
+    * [.findCompound](#findcompound)
+    * [.findCompoundByFormula](#findcompoundbyformula)
+    * [.findCompoundByWeight](#findcompoundbyweight)
+    * [.findCompooundByMass](#findcompoundbymass)
+    * [.findGene](#findgene)
+    * [.findEnzyme](#findenzyme)
+    * [.getReactionById](#getreactionbyid)
+    * [.getCompoundById](#getcompoundbyid)
+    * [.getGeneById](#getgenebyid)
+    * [.getEnzymeById](#getenzymebyid)
 
 <a name="findreaction"></a>
 
