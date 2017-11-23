@@ -1,6 +1,6 @@
 var isnode = false;
 var request = null;
-const base = "http://rest.kegg.jp";
+let base = "http://rest.kegg.jp";
 
 // Make sure we have ajax in node
 if (typeof XMLHttpRequest == "undefined") {
@@ -355,6 +355,14 @@ function KEGGgetReactionsForCompound(id, cb) {
 
 //-----------------------------------------------------------------------------
 
+function options(o) {
+	for (var x in o) {
+		switch(x) {
+		case "url"		: base = o.url; break;
+		}
+	}
+}
+
 exports.find = KEGGfind;
 
 exports.findCompound = KEGGfindCompound;
@@ -372,4 +380,8 @@ exports.getReactionById = KEGGgetReactionById;
 exports.getEnzymeById = KEGGgetEnzymeById;
 
 exports.getReactionsForCompound = KEGGgetReactionsForCompound;
+
+exports.options = options;
+
+
 
