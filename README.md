@@ -1,6 +1,7 @@
 # KEGG API
 
 A JavaScript wrapper for the KEGG biological database. Results are returned as JSON objects, see below for structure details.
+There are license restrictions on the use of KEGG, along with other guidelines. Please check at http://www.kegg.jp/kegg/ to make sure you use the system appropriately.
 
 ## Installation
 
@@ -25,27 +26,37 @@ KEGG.options({url: "http://..."});
 
 ## Documentation
 
-### findReaction
-* query - A string reaction name or partial name
-* callback - Function with one parameter for an array of results
+### `findReaction(query {string}, callback {function (data)})`
+Result data is an array of objects with:
+* `id` - KEGG reaction ID number
+* `name` - Human readable reaction name
 
-Results are an array of objects containing:
-* id - KEGG reaction ID number
-* name - Human readable reaction name
+### `findCompound(query {string}, callback {function (data)})`
+Result data is an array of objects with:
+* `id` - KEGG compound ID number
+* `name` - Human readable compound name
 
-### findCompound
-* query - A string compound name
-* callback - Function with one parameter for an array of results
+### `findCompoundByFormula(query {string}, callback {function (data)})`
+Result data is an array of objects with:
+* `id` - KEGG compound ID number
+* `name` - Human readable compound name
 
-### findCompoundByFormula
+### `findCompoundByWeight(query {string}, callback {function (data)})`
+Result data is an array of objects with:
+* `id` - KEGG compound ID number
+* `name` - Human readable compound name
 
-### findCompoundByWeight
+### `findCompoundByMass(query {string}, callback {function (data)})`
+Result data is an array of objects with:
+* `id` - KEGG compound ID number
+* `name` - Human readable compound name
 
-### findCompoundByMass
+### `findGene(query {string}, callback {function (data)})`
 
-### findGene
-
-### findEnzyme
+### `findEnzyme(query {string}, callback {function (data)})`
+Result data is an array of objects with:
+* `id` - EC enzyme number
+* `name` - Human readable enzyme name
 
 ### getReactionById
 * id - KEGG reaction ID, eg. "R04573"
