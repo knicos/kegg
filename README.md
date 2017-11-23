@@ -26,37 +26,66 @@ KEGG.options({url: "http://..."});
 
 ## Documentation
 
+* KEGG
+** [.findReaction](#findreaction)
+** [.findCompound](#findcompound)
+** [.findCompoundByFormula](#findcompoundbyformula)
+** [.findCompoundByWeight](#findcompoundbyweight)
+** [.findCompooundByMass](#findcompoundbymass)
+** [.findGene](#findgene)
+** [.findEnzyme](#findenzyme)
+** [.getReactionById](#getreactionbyid)
+** [.getCompoundById](#getcompoundbyid)
+** [.getGeneById](#getgenebyid)
+** [.getEnzymeById](#getenzymebyid)
+
+<a name="findreaction"></a>
+
 ### `.findReaction(query {string}, callback {function (data)})`
 Result data is an array of objects with:
 * `id` - KEGG reaction ID number
 * `name` - Human readable reaction name
+
+<a name="findcompound"></a>
 
 ### `.findCompound(query {string}, callback {function (data)})`
 Result data is an array of objects with:
 * `id` - KEGG compound ID number
 * `name` - Human readable compound name
 
+<a name="findcompoundbyformula"></a>
+
 ### `.findCompoundByFormula(query {string}, callback {function (data)})`
 Result data is an array of objects with:
 * `id` - KEGG compound ID number
 * `name` - Human readable compound name
+
+<a name="findcompoundbyweight"></a>
 
 ### `.findCompoundByWeight(query {string}, callback {function (data)})`
 Result data is an array of objects with:
 * `id` - KEGG compound ID number
 * `name` - Human readable compound name
 
+<a name="findcompoundbymass"></a>
+
 ### `.findCompoundByMass(query {string}, callback {function (data)})`
 Result data is an array of objects with:
 * `id` - KEGG compound ID number
 * `name` - Human readable compound name
 
+<a name="findgene"></a>
+
 ### `.findGene(query {string}, callback {function (data)})`
+
+<a name="findenzyme"></a>
 
 ### `.findEnzyme(query {string}, callback {function (data)})`
 Result data is an array of objects with:
 * `id` - EC enzyme number
 * `name` - Human readable enzyme name
+
+<a name="getreactionbyid"></a>
 
 ### `.getReactionById(id {string}, callback {function (data)})`
 Reaction data object:
@@ -66,6 +95,8 @@ Reaction data object:
 * `enzyme` - EC number
 * `pathways` - Array of associated pathways
 * `rclasses` - Object
+
+<a name="getcompoundbyid"></a>
 
 ### `.getCompoundById(id {string}, callback {function (data)})`
 Compound data object:
@@ -78,8 +109,11 @@ Compound data object:
 * `enzymes` - Array of enyzyme EC numbers
 * `dblinks` - Object to convert ID
 
+<a name="getgenebyid"></a>
+
 ### `.getGeneById(id {string}, callback {function (data)})`
 
+<a name="getenzymebyid"></a>
 
 ### `.getEnzymeById(ec {string}, callback {function (data)})`
 Enzyme data object:
