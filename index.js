@@ -353,6 +353,17 @@ function KEGGgetReactionsForCompound(id, cb) {
 	});
 }
 
+function KEGGgetReactionsForEnzyme(id, cb) {
+	KEGGlink("reaction", "ec:"+id, function(data) {
+		if (!data) cb(data);
+		var rs = [];
+		for (var i=0; i<data.length; i++) {
+			rs.push(data[i].target.split(":")[1]);
+		}
+		cb(rs);
+	});
+}
+
 //-----------------------------------------------------------------------------
 
 function options(o) {
@@ -380,6 +391,7 @@ exports.getReactionById = KEGGgetReactionById;
 exports.getEnzymeById = KEGGgetEnzymeById;
 
 exports.getReactionsForCompound = KEGGgetReactionsForCompound;
+exports.getReactionsForEnzyme = KEGGgetReactionsForEnzyme;
 
 exports.options = options;
 

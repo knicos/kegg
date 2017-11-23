@@ -17,6 +17,11 @@ KEGG.getReactionById("R04573", function(data) {
 	...
 });
 ```
+Due to HTTPS and CORS restrictions in a browser you may need to proxy the database. Set the new database URL using:
+
+```javascript
+KEGG.options({url: "http://..."});
+```
 
 ## Documentation
 
